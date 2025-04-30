@@ -2,25 +2,30 @@
 numpy==1.24.4
 pandas==1.5.3
 
-# Visualization
+# Visualization (used in development, optional in deployment)
 matplotlib==3.7.1
 seaborn==0.12.2
 
-# Feature Selection & Statistical Analysis
+# Feature Selection, Modeling, and Evaluation
 scikit-learn==1.2.2
 scipy==1.10.1
-statsmodels==0.13.5
 xgboost==1.7.5
+statsmodels==0.13.5
 
 # Model Explainability
 shap==0.41.0
 lime==0.2.0.1
 
-# Model Deployment
+# Web Scraping & URL Feature Extraction
+requests==2.28.2
+beautifulsoup4==4.12.2
+tldextract==3.4.0
+googlesearch-python==1.2.3
+python-magic==0.4.27
+python-multipart==0.0.6
+python-dotenv==1.0.0  # For loading .env API keys
+
+# Deployment
 streamlit==1.22.0
 joblib==1.2.0
 flask==2.2.3
-
-
-
-
