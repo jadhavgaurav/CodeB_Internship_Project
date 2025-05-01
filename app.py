@@ -10,87 +10,81 @@ st.set_page_config(
     layout="centered"
 )
 
-# Background Image
+# ========== Custom CSS Styling ==========
 st.markdown(
-    f"""
+    """
     <style>
-    .stApp {{
-        background-image: url("https://images.unsplash.com/photo-1549921296-3a4c24821eb0");
+    .stApp {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/017/856/900/non_2x/digital-padlock-with-hud-virtual-screen-on-blue-background-cyber-security-technology-and-privacy-data-network-protection-concept-vector.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }}
-    .main-box {{
-        background-color: rgba(255, 255, 255, 0.85);
+    }
+    .main-box {
+        background-color: rgba(255, 255, 255, 0.88);
         padding: 2rem;
         border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }}
-    .title-style {{
+        max-width: 700px;
+        margin: 3rem auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .title-style {
         font-size: 36px;
         font-weight: bold;
         text-align: center;
         color: #004080;
         margin-bottom: 20px;
-    }}
-    .btn-style > button {{
-        background-color: #008CBA;
-        color: white;
-        padding: 10px 24px;
-        font-size: 16px;
+    }
+    .predict-btn > button {
+        background-color: #004080 !important;
+        color: white !important;
         border-radius: 8px;
-    }}
+        font-size: 16px;
+        padding: 10px 24px;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# ========== Load Pipeline ==========
-pipeline = joblib.load("xgb_pipeline.pkl")  # Make sure path is correct
+# ========== Load Trained Pipeline ==========
+pipeline = joblib.load("xgb_pipeline.pkl")  # Ensure this path is valid
 
 # ========== App UI ==========
-with st.container():
-    st.markdown('<div class="main-box">', unsafe_allow_html=True)
+st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
-    st.markdown("""
-        <div class="title-style">
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <span style="font-size: 40px;">🔍</span>&nbsp;
-            </div>
+# Title
+st.markdown("""
+    <div class="title-style">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <span style="font-size: 40px;">🔍</span>&nbsp;
+            <span>Phishing URL Detector</span>
         </div>
-    """, unsafe_allow_html=True)
+    </div>
+""", unsafe_allow_html=True)
 
+# URL Input
+url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
-    st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
+# Predict Button
+col_center = st.columns([1, 2, 1])[1]
+with col_center:
+    predict_btn = st.button("🚀 Predict", key="predict", help="Click to predict", type="primary")
 
-    url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
+# Prediction Logic
+if predict_btn and url_input:
+    try:
+        with st.spinner("🔄 Extracting features & predicting..."):
+            features = extract_features_from_url(url_input)
+            df_features = pd.DataFrame(features)
+            prediction = pipeline.predict(df_features)[0]
 
-    paste_col, predict_col = st.columns([1, 2])
-    # with paste_col:
-    #     if st.button("📋 Paste from Clipboard"):
-    #         try:
-    #             import pyperclip
-    #             pasted_url = pyperclip.paste()
-    #             if pasted_url:
-    #                 url_input = pasted_url
-    #                 st.success("Pasted from clipboard.")
-    #             else:
-    #                 st.warning("Clipboard is empty.")
-    #         except Exception:
-    #             st.warning("⚠️ Clipboard access only works locally, not on hosted platforms.")
+        if prediction == 0:
+            st.success("✅ Legitimate Website")
+        else:
+            st.error("🚨 Phishing Website")
+    except Exception as e:
+        st.error(f"❌ Error: {str(e)}")
 
-    with predict_col:
-        predict_btn = st.button("🚀 Predict", key="predict", help="Click to predict phishing or legitimate.")
-
-    if predict_btn and url_input:
-        try:
-            with st.spinner("🔄 Extracting features & predicting..."):
-                features = extract_features_from_url(url_input)
-                df_features = pd.DataFrame(features)
-                prediction = pipeline.predict(df_features)[0]
-
-            st.success("✅ Legitimate Website" if prediction == 0 else "🚨 Phishing Website")
-        except Exception as e:
-            st.error(f"❌ Error: {str(e)}")
-
-    st.markdown('</div>', unsafe_allow_html=True)
+# End of container
+st.markdown('</div>', unsafe_allow_html=True)
