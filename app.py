@@ -58,23 +58,23 @@ with col[1]:
     predict_btn = st.button("🚀 Predict")
 
 if predict_btn:
-    if url_input:
+    if not url_input:
+        st.warning("⚠️ Please enter a URL.")
+    else:
         try:
             with st.spinner("🔄 Extracting features & predicting..."):
-                features = extract_features_from_url(url_input)
-                df = pd.DataFrame(features)
-                prob_phishing = pipeline.predict_proba(df)[0][1]  # Probability of phishing
+                features_df = extract_features_from_url(url_input)
 
-            st.info(f"🔢 Confidence (legitimate): **{prob_phishing:.2%}**")
+                # Predict probability of phishing class (1)
+                phishing_prob = pipeline.predict_proba(features_df)[0][1]
 
-            if prob_phishing > 0.5:
-                st.success("✅ Legitimate Website")
-            else:
-                st.error("🚨 Phishing Website Detected")
+                # Display confidence
+                st.info(f"📊 Model Confidence (Phishing): **{phishing_prob:.2%}**")
+
+                if phishing_prob > 0.5:
+                    st.error("🚨 This is likely a **Phishing Website**")
+                else:
+                    st.success("✅ This appears to be a **Legitimate Website**")
 
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
-    else:
-        st.warning("⚠️ Please enter a URL.")
-
-st.markdown('</div>', unsafe_allow_html=True)
