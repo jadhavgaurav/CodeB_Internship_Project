@@ -28,7 +28,7 @@ st.markdown("""
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
     .main-box {
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(0,0,0, 0.9);
         padding: 2rem;
         border-radius: 15px;
         max-width: 700px;
