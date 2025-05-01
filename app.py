@@ -11,38 +11,38 @@ st.set_page_config(
 )
 
 # ========== Custom Styling ==========
-st.markdown("""
-<style>
-    .stApp {
-        background-image: url("https://t4.ftcdn.net/jpg/03/58/10/87/360_F_358108785_rNJtmort9m65M3pft5swd7lnKJcTCB8u.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    .main-box {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 3rem 2rem;
-        border-radius: 15px;
-        max-width: 700px;
-        margin: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .title-style {
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #003366;
-        margin-bottom: 2rem;
-    }
-    .predict-btn > button {
-        background-color: #dc3545 !important;
-        color: white !important;
-        font-size: 16px !important;
-        border-radius: 8px !important;
-        padding: 10px 24px;
-    }
-</style>
-""", unsafe_allow_html=True)
+# st.markdown("""
+# <style>
+#     .stApp {
+#         background-image: url("https://t4.ftcdn.net/jpg/03/58/10/87/360_F_358108785_rNJtmort9m65M3pft5swd7lnKJcTCB8u.jpg");
+#         background-size: cover;
+#         background-repeat: no-repeat;
+#         background-attachment: fixed;
+#     }
+#     .main-box {
+#         background-color: rgba(255, 255, 255, 0.9);
+#         padding: 3rem 2rem;
+#         border-radius: 15px;
+#         max-width: 700px;
+#         margin: auto;
+#         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+#     }
+#     .title-style {
+#         text-align: center;
+#         font-size: 2.5rem;
+#         font-weight: bold;
+#         color: #003366;
+#         margin-bottom: 2rem;
+#     }
+#     .predict-btn > button {
+#         background-color: #dc3545 !important;
+#         color: white !important;
+#         font-size: 16px !important;
+#         border-radius: 8px !important;
+#         padding: 10px 24px;
+#     }
+# </style>
+# """, unsafe_allow_html=True)
 
 # ========== Load Model ==========
 pipeline = joblib.load("xgb_pipeline.pkl")
