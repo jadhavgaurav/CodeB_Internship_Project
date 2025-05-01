@@ -50,22 +50,33 @@ pipeline = joblib.load("xgb_pipeline.pkl")  # Make sure path is correct
 
 # ========== App UI ==========
 with st.container():
-    st.markdown('<div class="main-box">', unsafe_allow_html=True)
+    st.markdown("""
+<div class="title-style">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <span style="font-size: 40px;">🔍</span>&nbsp;
+        <span>Phishing URL Detector</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 
     st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
     url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
     paste_col, predict_col = st.columns([1, 2])
-    with paste_col:
-        if st.button("📋 Paste from Clipboard"):
-            import pyperclip
-            try:
-                pasted_url = pyperclip.paste()
-                st.experimental_set_query_params(url=pasted_url)
-                url_input = pasted_url
-            except:
-                st.warning("Clipboard access not available.")
+    # with paste_col:
+    #     if st.button("📋 Paste from Clipboard"):
+    #         try:
+    #             import pyperclip
+    #             pasted_url = pyperclip.paste()
+    #             if pasted_url:
+    #                 url_input = pasted_url
+    #                 st.success("Pasted from clipboard.")
+    #             else:
+    #                 st.warning("Clipboard is empty.")
+    #         except Exception:
+    #             st.warning("⚠️ Clipboard access only works locally, not on hosted platforms.")
 
     with predict_col:
         predict_btn = st.button("🚀 Predict", key="predict", help="Click to predict phishing or legitimate.")
