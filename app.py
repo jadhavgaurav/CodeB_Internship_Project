@@ -68,9 +68,9 @@ if predict_btn:
             st.info(f"🔢 Confidence (Phishing): **{prob_phishing:.2%}**")
 
             if prob_phishing > 0.5:
-                st.error("🚨 Phishing Website Detected")
-            else:
                 st.success("✅ Legitimate Website")
+            else:
+                st.error("🚨 Phishing Website Detected")
 
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
