@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divJW04VRN5KX3DV30"></div>
+        <div class="lime top_div" id="top_divO8OGTX9A2J9M77H"></div>
         
         <script>
-        var top_div = d3.select('#top_divJW04VRN5KX3DV30').classed('lime top_div', true);
+        var top_div = d3.select('#top_divO8OGTX9A2J9M77H').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9983658194541931, 0.001634152140468359]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.998143196105957, 0.0018567965598776937]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["page_rank > 0.50", -0.3275771383147923], ["nb_www <= 0.00", 0.19352396032918115], ["phish_hints <= 0.00", -0.1930012279480422], ["ratio_digits_host <= 0.00", -0.1386239599709469], ["nb_qm <= 0.00", -0.10597233659045233], ["nb_dots <= 0.00", -0.08834673209776459], ["ratio_intHyperlinks > 0.28", -0.08775518344294128], ["-0.29 < longest_words_raw <= 0.00", -0.0641193156936937], ["-0.50 < length_words_raw <= 0.00", 0.0555151790183164], ["ratio_digits_url <= 0.00", -0.04722016688184198], ["google_index <= -1.00", -0.00985987704131647], ["avg_word_path > 0.28", 0.0009569190239017557], ["shortest_word_host <= 0.00", 0.0001899116421954442], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["page_rank > 0.50", -0.3465990872202217], ["google_index <= -1.00", 0.26929065734078167], ["phish_hints <= 0.00", -0.19314696831946385], ["nb_www <= 0.00", 0.16756290171032695], ["-0.50 < length_words_raw <= 0.00", 0.11120605781126904], ["nb_dots <= 0.00", -0.09182133789639643], ["ratio_digits_host <= 0.00", -0.09164586173998993], ["nb_qm <= 0.00", -0.05492881219544778], ["-0.29 < longest_words_raw <= 0.00", -0.05354543691595784], ["ratio_intHyperlinks > 0.28", -0.05016306968571723], ["ratio_digits_url <= 0.00", -0.04201270470056177], ["avg_word_path > 0.28", 0.01200630857979911], ["shortest_word_host <= 0.00", 0.006796496673406108], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["page_rank", "1.00", -0.3275771383147923], ["nb_www", "0.00", 0.19352396032918115], ["phish_hints", "0.00", -0.1930012279480422], ["ratio_digits_host", "0.00", -0.1386239599709469], ["nb_qm", "0.00", -0.10597233659045233], ["nb_dots", "0.00", -0.08834673209776459], ["ratio_intHyperlinks", "0.31", -0.08775518344294128], ["longest_words_raw", "-0.14", -0.0641193156936937], ["length_words_raw", "0.00", 0.0555151790183164], ["ratio_digits_url", "0.00", -0.04722016688184198], ["google_index", "-1.00", -0.00985987704131647], ["avg_word_path", "0.37", 0.0009569190239017557], ["shortest_word_host", "-0.33", 0.0001899116421954442], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "1.00", -0.3465990872202217], ["google_index", "-1.00", 0.26929065734078167], ["phish_hints", "0.00", -0.19314696831946385], ["nb_www", "0.00", 0.16756290171032695], ["length_words_raw", "0.00", 0.11120605781126904], ["nb_dots", "0.00", -0.09182133789639643], ["ratio_digits_host", "0.00", -0.09164586173998993], ["nb_qm", "0.00", -0.05492881219544778], ["longest_words_raw", "-0.14", -0.05354543691595784], ["ratio_intHyperlinks", "0.31", -0.05016306968571723], ["ratio_digits_url", "0.00", -0.04201270470056177], ["avg_word_path", "0.37", 0.01200630857979911], ["shortest_word_host", "-0.33", 0.006796496673406108], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>

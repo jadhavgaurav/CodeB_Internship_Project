@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divJC4G5ZUPPC0J7C9"></div>
+        <div class="lime top_div" id="top_divNSWS8E8RG2Y50LH"></div>
         
         <script>
-        var top_div = d3.select('#top_divJC4G5ZUPPC0J7C9').classed('lime top_div', true);
+        var top_div = d3.select('#top_divNSWS8E8RG2Y50LH').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.0009286403656005859, 0.9990713596343994]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.001148223876953125, 0.9988517761230469]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["page_rank <= -0.50", 0.38560532878528214], ["0.00 < nb_www <= 1.00", -0.19643561329230327], ["phish_hints <= 0.00", -0.1899615558783203], ["longest_words_raw > 0.71", 0.16476961002857904], ["ratio_digits_host <= 0.00", -0.12551558973388333], ["nb_qm <= 0.00", -0.09664748468388142], ["ratio_digits_url > 1.00", 0.0888915339631763], ["ratio_intHyperlinks > 0.28", -0.08570138491289797], ["nb_dots <= 0.00", -0.07846283978998578], ["0.00 < length_words_raw <= 0.50", -0.03346493382572557], ["avg_word_path > 0.28", 0.014715938497379304], ["-1.00 < google_index <= 0.00", -0.00992192398323975], ["shortest_word_host <= 0.00", -0.009331061178212346], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["page_rank <= -0.50", 0.5390043380279748], ["-1.00 < google_index <= 0.00", -0.26702411640667234], ["phish_hints <= 0.00", -0.1783347964994028], ["0.00 < nb_www <= 1.00", -0.17418237771982886], ["longest_words_raw > 0.71", 0.1174444075870531], ["ratio_digits_host <= 0.00", -0.0787013902165462], ["nb_dots <= 0.00", -0.06666332386300108], ["ratio_digits_url > 1.00", 0.05371202893681841], ["ratio_intHyperlinks > 0.28", -0.048601932686257024], ["nb_qm <= 0.00", -0.03561662614273477], ["avg_word_path > 0.28", 0.0246649748542446], ["shortest_word_host <= 0.00", 0.02244089925502135], ["0.00 < length_words_raw <= 0.50", 0.01812261103202389], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["page_rank", "-0.75", 0.38560532878528214], ["nb_www", "1.00", -0.19643561329230327], ["phish_hints", "0.00", -0.1899615558783203], ["longest_words_raw", "3.00", 0.16476961002857904], ["ratio_digits_host", "0.00", -0.12551558973388333], ["nb_qm", "0.00", -0.09664748468388142], ["ratio_digits_url", "2.49", 0.0888915339631763], ["ratio_intHyperlinks", "0.36", -0.08570138491289797], ["nb_dots", "0.00", -0.07846283978998578], ["length_words_raw", "0.33", -0.03346493382572557], ["avg_word_path", "1.28", 0.014715938497379304], ["google_index", "0.00", -0.00992192398323975], ["shortest_word_host", "0.00", -0.009331061178212346], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "-0.75", 0.5390043380279748], ["google_index", "0.00", -0.26702411640667234], ["phish_hints", "0.00", -0.1783347964994028], ["nb_www", "1.00", -0.17418237771982886], ["longest_words_raw", "3.00", 0.1174444075870531], ["ratio_digits_host", "0.00", -0.0787013902165462], ["nb_dots", "0.00", -0.06666332386300108], ["ratio_digits_url", "2.49", 0.05371202893681841], ["ratio_intHyperlinks", "0.36", -0.048601932686257024], ["nb_qm", "0.00", -0.03561662614273477], ["avg_word_path", "1.28", 0.0246649748542446], ["shortest_word_host", "0.00", 0.02244089925502135], ["length_words_raw", "0.33", 0.01812261103202389], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>
