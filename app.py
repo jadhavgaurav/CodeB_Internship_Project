@@ -51,16 +51,16 @@ pipeline = joblib.load("xgb_pipeline.pkl")  # Make sure path is correct
 # ========== App UI ==========
 with st.container():
     st.markdown("""
-<div class="title-style">
-    <div style="display: flex; justify-content: center; align-items: center;">
-        <span style="font-size: 40px;">🔍</span>&nbsp;
-        <span>Phishing URL Detector</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+        <div class="title-style">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <span style="font-size: 40px;">🔍</span>&nbsp;
+            <span>Phishing URL Detector</span>
+        </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 
-    st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
+    # st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
     url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
