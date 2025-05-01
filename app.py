@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# ========== CSS Styling ==========
+# ========== Custom CSS ==========
 st.markdown("""
 <style>
     .stApp {
@@ -19,49 +19,39 @@ st.markdown("""
         background-attachment: fixed;
     }
 
-    .main-container {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 3rem 2rem;
-        border-radius: 15px;
-        max-width: 700px;
-        margin: 5vh auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    .title-style {
         text-align: center;
-    }
-
-    .main-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
         font-weight: 800;
-        color: #003366;
-        margin-bottom: 1.5rem;
+        color: #ffffff;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
-    .predict-btn button {
-        background-color: #dc3545 !important;
-        color: white !important;
-        font-size: 16px !important;
-        border-radius: 8px !important;
-        padding: 10px 24px;
-        width: 100%;
-    }
-
-    .stTextInput > div > div > input {
+    .stTextInput input {
         text-align: center;
+    }
+
+    .stButton>button {
+        background-color: #ff4b4b;
+        color: white;
+        padding: 10px 24px;
+        font-size: 16px;
+        border-radius: 10px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# ========== Load Model ==========
+# ========== Load Trained Pipeline ==========
 pipeline = joblib.load("xgb_pipeline.pkl")
 
-# ========== App Layout ==========
-st.markdown('<div class="main-container">', unsafe_allow_html=True)
-
-st.markdown('<div class="main-title">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
+# ========== App UI ==========
+st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
 url_input = st.text_input("Enter Website URL", placeholder="https://example.com")
 
-if st.button("🚀 Predict", key="predict"):
+if st.button("🚀 Predict"):
     if url_input:
         try:
             with st.spinner("🔄 Extracting features & predicting..."):
@@ -72,6 +62,4 @@ if st.button("🚀 Predict", key="predict"):
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
     else:
-        st.warning("Please enter a URL.")
-
-st.markdown('</div>', unsafe_allow_html=True)
+        st.warning("⚠️ Please enter a URL.")
