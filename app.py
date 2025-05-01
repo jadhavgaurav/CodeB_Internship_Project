@@ -65,7 +65,7 @@ if predict_btn:
                 df = pd.DataFrame(features)
                 prob_phishing = pipeline.predict_proba(df)[0][1]  # Probability of phishing
 
-            st.info(f"🔢 Confidence (Phishing): **{prob_phishing:.2%}**")
+            st.info(f"🔢 Confidence (legitimate): **{prob_phishing:.2%}**")
 
             if prob_phishing > 0.5:
                 st.success("✅ Legitimate Website")
