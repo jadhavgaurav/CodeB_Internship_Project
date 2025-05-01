@@ -19,20 +19,21 @@ st.markdown("""
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-    .main-box {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 3rem 2rem;
-        border-radius: 15px;
-        max-width: 700px;
-        margin: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
     .title-style {
         text-align: center;
         font-size: 2.5rem;
         font-weight: bold;
         color: #003366;
-        margin-bottom: 2rem;
+        margin: 2rem 0 1.5rem 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .main-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 700px;
+        margin: auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
     .predict-btn > button {
         background-color: #dc3545 !important;
@@ -47,9 +48,11 @@ st.markdown("""
 # ========== Load Model ==========
 pipeline = joblib.load("xgb_pipeline.pkl")
 
-# ========== UI ==========
-st.markdown('<div class="main-box">', unsafe_allow_html=True)
+# ========== Title (No White Box) ==========
 st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
+
+# ========== Input Box Inside Main Box ==========
+st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
 url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
@@ -78,3 +81,5 @@ if predict_btn:
 
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
+
+st.markdown('</div>', unsafe_allow_html=True)
