@@ -71,17 +71,17 @@ Dropped 5 redundant features based on correlation & low importance.
 - XGBoost
 - ANN
 
-🎯 **Best Model**: `RandomForestClassifier`
+🎯 **Best Model**: `XGBoostClassifier`
 - **Hyperparameter tuning**: `GridSearchCV` with `roc_auc` scoring
 - **Best params**:
 ```python
 RandomForestClassifier(
-    'bootstrap': False,
-    'max_depth': 20,
-    'min_samples_leaf': 1, 
-    'min_samples_split': 2, 
-    'n_estimators': 300
-    'bootstrap': [True, False]
+    'colsample_bytree': 0.8, 
+    'gamma': 0.1, 
+    'learning_rate': 0.1, 
+    'max_depth': 10, 
+    'n_estimators': 100, 
+    'subsample': 0.8
 )
 ```
 
@@ -91,11 +91,11 @@ RandomForestClassifier(
 
 | Metric       | Value   |
 |--------------|---------|
-| Accuracy     | 95.01%   |
-| Precision    | 94.46%   |
-| Recall       | 95.62%   |
-| F-1 Score    | 95.04    |
-| ROC-AUC      | 0.987   |
+| Accuracy     | 95.83%   |
+| Precision    | 95.46%   |
+| Recall       | 96.23%   |
+| F-1 Score    | 95.86    |
+| ROC-AUC      | 0.990   |
 
 These metrics indicate that the model is highly effective in distinguishing between **phishing** and **legitimate** websites.
 
@@ -116,10 +116,10 @@ All plots were generated to visually assess the model's classification confidenc
 LIME was used to explain the **top 5 individual predictions** made by the final Random Forest model.
 
 ### 🔑 Key Contributing Features:
-- `url_complexity`
-- `phish_hints`
+- `google_index`
+- `page_rank`
 - `nb_www`
-- `nb_qm`
+- `ratio_intHyperlinks`
 
 ### 📂 Output Format:
 - Interactive LIME explanations saved as `.html` files (`lime_explanation_instance_*.html`)

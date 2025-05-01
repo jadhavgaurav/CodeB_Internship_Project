@@ -4,13 +4,17 @@ import tldextract
 import pandas as pd
 import numpy as np
 from urllib.parse import urlparse
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-# Load API Key from .env
+# API Keys from .env
 OPENPAGERANK_API_KEY = os.getenv("OPEN_PAGERANK_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GOOGLE_CSE_ID = os.getenv("GOOGLE_CSE_ID")
+
 
 def extract_features_from_url(url):
     parsed = urlparse(url)
@@ -19,56 +23,26 @@ def extract_features_from_url(url):
 
     ext = tldextract.extract(url)
     domain = ext.domain
-    suffix = ext.suffix
     subdomain = ext.subdomain
 
     digits_in_host = sum(c.isdigit() for c in hostname)
     digits_in_url = sum(c.isdigit() for c in url)
 
-    # Feature 1: longest_words_raw
     longest_words_raw = max([len(w) for w in re.split(r'\W+', url) if w] or [0])
-
-    # Feature 2: domain_in_title (hardcoded 0 since HTML is not fetched here)
-    domain_in_title = 0
-
-    # Feature 3: ratio_digits_host
+    domain_in_title = get_domain_in_title(url, domain)
     ratio_digits_host = digits_in_host / len(hostname) if hostname else 0
-
-    # Feature 4: nb_dots
     nb_dots = url.count(".")
-
-    # Feature 5: shortest_word_host
     shortest_word_host = min([len(w) for w in hostname.split(".") if w] or [0])
-
-    # Feature 6: google_index (default 1 since Google API is paid)
-    google_index = 1
-
-    # Feature 7: ratio_digits_url
+    google_index = get_google_index_status(url)
     ratio_digits_url = digits_in_url / len(url) if url else 0
-
-    # Feature 8: avg_word_path
-    path_words = re.split(r'\W+', path)
-    avg_word_path = np.mean([len(w) for w in path_words if w]) if path_words else 0
-
-    # Feature 9: phish_hints (based on heuristic keywords)
-    phish_hints = int(any(keyword in url.lower() for keyword in ["login", "update", "secure", "ebayisapi", "webscr"]))
-
-    # Feature 10: nb_www
+    avg_word_path = np.mean([len(w) for w in re.split(r'\W+', path) if w]) if path else 0
+    phish_hints = int(any(k in url.lower() for k in ["login", "update", "secure", "ebayisapi", "webscr"]))
     nb_www = url.count("www")
-
-    # Feature 11: nb_qm
     nb_qm = url.count("?")
-
-    # Feature 12: length_words_raw
     length_words_raw = sum(len(w) for w in re.split(r'\W+', url) if w)
-
-    # Feature 13: ratio_intHyperlinks (assumed default)
-    ratio_intHyperlinks = 1.0
-
-    # Feature 14: page_rank
+    ratio_intHyperlinks = get_ratio_int_hyperlinks(url)
     page_rank = get_page_rank_from_openpagerank(hostname)
 
-    # Construct feature vector
     features = {
         'shortest_word_host': shortest_word_host,
         'nb_www': nb_www,
@@ -88,15 +62,58 @@ def extract_features_from_url(url):
 
     return pd.DataFrame([features])
 
+
 def get_page_rank_from_openpagerank(domain):
     try:
         response = requests.get(
             "https://openpagerank.com/api/v1.0/getPageRank",
             headers={"API-OPR": OPENPAGERANK_API_KEY},
-            params={"domains[]": domain}
+            params={"domains[]": domain},
+            timeout=5
         )
         data = response.json()
         return data['response'][0].get('page_rank_integer', 0)
     except Exception as e:
         print("PageRank fetch failed:", e)
         return 0
+
+
+def get_ratio_int_hyperlinks(url):
+    try:
+        response = requests.get(url, timeout=5)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        all_links = soup.find_all('a', href=True)
+        internal = [a for a in all_links if urlparse(a['href']).netloc in urlparse(url).netloc]
+        return len(internal) / len(all_links) if all_links else 1.0
+    except Exception as e:
+        print("Internal hyperlink ratio error:", e)
+        return 1.0
+
+
+def get_domain_in_title(url, domain):
+    try:
+        response = requests.get(url, timeout=5)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        title = soup.title.string.lower() if soup.title else ''
+        return int(domain.lower() in title)
+    except:
+        return 0
+
+
+def get_google_index_status(url):
+    try:
+        query = f"site:{url}"
+        response = requests.get(
+            "https://www.googleapis.com/customsearch/v1",
+            params={
+                "key": GOOGLE_API_KEY,
+                "cx": GOOGLE_CSE_ID,
+                "q": query
+            },
+            timeout=5
+        )
+        result = response.json()
+        return 1 if "items" in result and len(result["items"]) > 0 else 0
+    except Exception as e:
+        print("Google index check failed:", e)
+        return 1
