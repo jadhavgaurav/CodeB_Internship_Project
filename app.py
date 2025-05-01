@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# ========== Custom Styling ==========
+# ========== Custom CSS ==========
 st.markdown("""
 <style>
     .stApp {
@@ -20,19 +20,19 @@ st.markdown("""
         background-attachment: fixed;
     }
     .main-box {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 3rem 2rem;
+        background-color: rgba(255, 255, 255, 0.93);
+        padding: 2rem 2rem 3rem 2rem;
         border-radius: 15px;
-        max-width: 700px;
-        margin: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        max-width: 650px;
+        margin: 5% auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .title-style {
+        font-size: 2.2rem;
         text-align: center;
-        font-size: 2.5rem;
-        font-weight: bold;  
-        color: #003366;
-        margin-bottom: 2rem;
+        color: #002147;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
     }
     .predict-btn > button {
         background-color: #dc3545 !important;
@@ -47,14 +47,13 @@ st.markdown("""
 # ========== Load Model ==========
 pipeline = joblib.load("xgb_pipeline.pkl")
 
-# ========== UI ==========
+# ========== Main UI ==========
 st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
 st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
 url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
-# Center button
 col = st.columns([1, 1, 1])
 with col[1]:
     predict_btn = st.button("🚀 Predict", key="predict")
