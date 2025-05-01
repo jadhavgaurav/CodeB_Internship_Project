@@ -44,20 +44,20 @@ def extract_features_from_url(url):
     page_rank = get_page_rank_from_openpagerank(hostname)
 
     features = {
-        'shortest_word_host': shortest_word_host,
-        'nb_www': nb_www,
         'phish_hints': phish_hints,
+        'domain_in_title': domain_in_title,
+        'length_words_raw': length_words_raw,
+        'nb_www': nb_www,
+        'shortest_word_host': shortest_word_host,
+        'nb_qm': nb_qm,
         'ratio_digits_host': ratio_digits_host,
         'google_index': google_index,
-        'longest_words_raw': longest_words_raw,
-        'ratio_digits_url': ratio_digits_url,
-        'length_words_raw': length_words_raw,
-        'avg_word_path': avg_word_path,
-        'nb_qm': nb_qm,
         'nb_dots': nb_dots,
+        'longest_words_raw': longest_words_raw,
+        'ratio_intHyperlinks': ratio_intHyperlinks,
         'page_rank': page_rank,
-        'domain_in_title': domain_in_title,
-        'ratio_intHyperlinks': ratio_intHyperlinks
+        'avg_word_path': avg_word_path,
+        'ratio_digits_url': ratio_digits_url
     }
 
     return pd.DataFrame([features])
