@@ -100,3 +100,10 @@ def get_page_rank_from_openpagerank(domain):
     except Exception as e:
         print("PageRank fetch failed:", e)
         return 0
+
+input_url = input("Enter a URL to extract features from: ")
+if not input_url.startswith("http"):
+    input_url = "http://" + input_url
+    
+feature_df = extract_features_from_url(input_url)
+print(feature_df)

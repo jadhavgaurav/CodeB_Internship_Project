@@ -74,7 +74,7 @@ with st.container():
         try:
             with st.spinner("🔄 Extracting features & predicting..."):
                 features = extract_features_from_url(url_input)
-                df_features = pd.DataFrame([features])
+                df_features = pd.DataFrame(features)
                 prediction = pipeline.predict(df_features)[0]
 
             st.success("✅ Legitimate Website" if prediction == 0 else "🚨 Phishing Website")
