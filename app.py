@@ -14,7 +14,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     .stApp {
-        background-image: url("https://t4.ftcdn.net/jpg/03/58/10/87/360_F_358108785_rNJtmort9m65M3pft5swd7lnKJcTCB8u.jpg");
+        background-image: url("https://images.unsplash.com/photo-1549921296-3a4c24821eb0");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
