@@ -70,20 +70,20 @@ def extract_features_from_url(url):
 
     # Construct feature vector
     features = {
-        'longest_words_raw': longest_words_raw,
-        'domain_in_title': domain_in_title,
-        'ratio_digits_host': ratio_digits_host,
-        'nb_dots': nb_dots,
         'shortest_word_host': shortest_word_host,
-        'google_index': google_index,
-        'ratio_digits_url': ratio_digits_url,
-        'avg_word_path': avg_word_path,
-        'phish_hints': phish_hints,
         'nb_www': nb_www,
-        'nb_qm': nb_qm,
+        'phish_hints': phish_hints,
+        'ratio_digits_host': ratio_digits_host,
+        'google_index': google_index,
+        'longest_words_raw': longest_words_raw,
+        'ratio_digits_url': ratio_digits_url,
         'length_words_raw': length_words_raw,
-        'ratio_intHyperlinks': ratio_intHyperlinks,
-        'page_rank': page_rank
+        'avg_word_path': avg_word_path,
+        'nb_qm': nb_qm,
+        'nb_dots': nb_dots,
+        'page_rank': page_rank,
+        'domain_in_title': domain_in_title,
+        'ratio_intHyperlinks': ratio_intHyperlinks
     }
 
     return pd.DataFrame([features])
