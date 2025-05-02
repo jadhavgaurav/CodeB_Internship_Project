@@ -30,5 +30,11 @@ streamlit
 joblib
 flask
 
+dvc[gs]
+
 # Clipboard Support
 pyperclip
+
+# Jupyter Notebook Support (optional, for development)
+nbformat
+nbconvert

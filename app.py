@@ -46,7 +46,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ========== Load Model ==========
-pipeline = joblib.load("xgb_pipeline.pkl")
+pipeline = joblib.load("models/xgb_pipeline.pkl")
 
 # ========== Title (No White Box) ==========
 st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)

@@ -1,8 +1,10 @@
 import nbformat
 from nbconvert import PythonExporter
 
+file_to_convert = input("Enter the path to the Jupyter notebook file : ")
+
 # Load notebook
-with open("Internship_CodeB_week 5 & 6 copy.ipynb", "r", encoding="utf-8") as f:
+with open(file_to_convert, "r", encoding="utf-8") as f:
     nb = nbformat.read(f, as_version=4)
 
 # Remove all markdown cells
@@ -16,8 +18,10 @@ python_exporter.exclude_output_prompt = True
 # Convert notebook to script
 script, _ = python_exporter.from_notebook_node(nb)
 
+converted_script_name = file_to_convert.replace(".ipynb", ".py")
+
 # Save the clean script
-with open("final_project.py", "w", encoding="utf-8") as f:
+with open(converted_script_name, "w", encoding="utf-8") as f:
     f.write(script)
 
-print("✅ Notebook successfully converted to code-only script: output_script.py")
+print(f"✅ Notebook successfully converted to code-only script: {converted_script_name}")

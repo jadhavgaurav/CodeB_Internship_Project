@@ -6,7 +6,9 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 
 # === Load Dataset ===
-df = pd.read_csv("phishing_dataset.csv")  # Replace with your actual CSV
+data_url = 'https://raw.githubusercontent.com/jadhavgaurav/CodeB_Internship_Project/refs/heads/main/data/dataset_phishing.csv'
+
+df = pd.read_csv(data_url)
 
 # === Final Feature Columns ===
 final_features = [
