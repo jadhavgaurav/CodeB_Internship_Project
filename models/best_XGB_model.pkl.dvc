@@ -1,0 +1,5 @@
+outs:
+- md5: 6840b89ed7995724a089c9382534363e
+  size: 673734
+  hash: md5
+  path: best_XGB_model.pkl
