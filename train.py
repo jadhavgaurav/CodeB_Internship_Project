@@ -6,30 +6,24 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 
 # === Load Dataset ===
-data_url = 'https://raw.githubusercontent.com/jadhavgaurav/CodeB_Internship_Project/refs/heads/main/data/dataset_phishing.csv'
+data_path = 'data/dataset_phishing.csv'
+df = pd.read_csv(data_path)
 
-df = pd.read_csv(data_url)
-
-# === Final Feature Columns ===
+# === Final Features Used for Modeling ===
 final_features = [
-    'shortest_word_host', 'nb_www', 'phish_hints', 'ratio_digits_host', 'google_index',
-    'longest_words_raw', 'ratio_digits_url', 'length_words_raw', 'avg_word_path',
-    'nb_qm', 'nb_dots', 'page_rank', 'domain_in_title', 'ratio_intHyperlinks'
+    'phish_hints', 'domain_in_title', 'length_words_raw', 'nb_www',
+    'shortest_word_host', 'nb_qm', 'ratio_digits_host', 'google_index',
+    'nb_dots', 'longest_words_raw', 'ratio_intHyperlinks',
+    'page_rank', 'avg_word_path', 'ratio_digits_url'
 ]
 
-# Replace 'Legitimate' with 0 and 'Phishing' with 1 in the 'status' column
-df['status'] = df['status'].map({'legitimate':0, 'phishing':1})
+# === Target Mapping ===
+df['status'] = df['status'].map({'legitimate': 0, 'phishing': 1})
 
 X = df[final_features]
 y = df['status']
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
-    test_size=0.2, 
-    random_state=42, 
-)
-
-# === Pipeline Setup ===
+# === Define Pipeline ===
 pipeline = Pipeline([
     ("power", PowerTransformer(method="yeo-johnson", standardize=False)),
     ("scaler", RobustScaler()),
@@ -46,8 +40,10 @@ pipeline = Pipeline([
     ))
 ])
 
-# === Fit and Save ===
+# === Train on full dataset (X, y) 
 pipeline.fit(X, y)
-joblib.dump(pipeline, "xgb_pipeline.pkl")
-print("✅ Training completed and pipeline saved as 'xgb_pipeline.pkl'")
 
+# === Save Trained Pipeline
+output_path = "models/xgb_pipeline.pkl"
+joblib.dump(pipeline, output_path)
+print(f"✅ Training completed and pipeline saved to: {output_path}")
