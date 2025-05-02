@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divT494V07656XGPAL"></div>
+        <div class="lime top_div" id="top_divUMH4ML0FIPTSCOD"></div>
         
         <script>
-        var top_div = d3.select('#top_divT494V07656XGPAL').classed('lime top_div', true);
+        var top_div = d3.select('#top_divUMH4ML0FIPTSCOD').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9970427751541138, 0.002957212273031473]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9968277215957642, 0.003172305878251791]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["page_rank > 0.50", -0.34255693169611023], ["google_index <= -1.00", 0.2740423167404052], ["phish_hints <= 0.00", -0.16076722200838], ["nb_www <= 0.00", 0.14491924990533467], ["ratio_digits_host <= 0.00", -0.10793815841783583], ["nb_dots <= 0.00", -0.06930659967189781], ["ratio_digits_url <= 0.00", -0.06713579567301586], ["0.00 < ratio_intHyperlinks <= 0.28", -0.05192474046531227], ["nb_qm <= 0.00", -0.047983330930937755], ["length_words_raw <= -0.50", -0.033512768105581424], ["longest_words_raw <= -0.29", -0.03319300148477898], ["0.00 < shortest_word_host <= 1.00", 0.019666424570641817], ["avg_word_path <= -0.72", 0.0025148467497037026], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["page_rank > 0.50", -0.3550851250629128], ["google_index <= -1.00", 0.2699257760451787], ["nb_www <= 0.00", 0.17956721215033827], ["phish_hints <= 0.00", -0.1596746135734015], ["ratio_digits_host <= 0.00", -0.08471222810477408], ["nb_dots <= 0.00", -0.07648575957427473], ["length_words_raw <= -0.50", -0.06927374465346083], ["ratio_digits_url <= 0.00", -0.059902829126479484], ["0.00 < ratio_intHyperlinks <= 0.28", -0.04597982665406953], ["nb_qm <= 0.00", -0.03047444797615126], ["longest_words_raw <= -0.29", -0.01688843901252002], ["0.00 < shortest_word_host <= 1.00", -0.014624675695897949], ["avg_word_path <= -0.72", -0.012171971782281275], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["page_rank", "1.25", -0.34255693169611023], ["google_index", "-1.00", 0.2740423167404052], ["phish_hints", "0.00", -0.16076722200838], ["nb_www", "0.00", 0.14491924990533467], ["ratio_digits_host", "0.00", -0.10793815841783583], ["nb_dots", "0.00", -0.06930659967189781], ["ratio_digits_url", "0.00", -0.06713579567301586], ["ratio_intHyperlinks", "0.16", -0.05192474046531227], ["nb_qm", "0.00", -0.047983330930937755], ["length_words_raw", "-0.50", -0.033512768105581424], ["longest_words_raw", "-0.43", -0.03319300148477898], ["shortest_word_host", "1.00", 0.019666424570641817], ["avg_word_path", "-0.72", 0.0025148467497037026], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "1.25", -0.3550851250629128], ["google_index", "-1.00", 0.2699257760451787], ["nb_www", "0.00", 0.17956721215033827], ["phish_hints", "0.00", -0.1596746135734015], ["ratio_digits_host", "0.00", -0.08471222810477408], ["nb_dots", "0.00", -0.07648575957427473], ["length_words_raw", "-0.50", -0.06927374465346083], ["ratio_digits_url", "0.00", -0.059902829126479484], ["ratio_intHyperlinks", "0.16", -0.04597982665406953], ["nb_qm", "0.00", -0.03047444797615126], ["longest_words_raw", "-0.43", -0.01688843901252002], ["shortest_word_host", "1.00", -0.014624675695897949], ["avg_word_path", "-0.72", -0.012171971782281275], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>

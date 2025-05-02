@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divCQKW43Y84WZMW8R"></div>
+        <div class="lime top_div" id="top_divEP6E8RTUO0166J9"></div>
         
         <script>
-        var top_div = d3.select('#top_divCQKW43Y84WZMW8R').classed('lime top_div', true);
+        var top_div = d3.select('#top_divEP6E8RTUO0166J9').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.0007252097129821777, 0.9992747902870178]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.001148223876953125, 0.9988517761230469]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["page_rank <= -0.50", 0.518354529173941], ["-1.00 < google_index <= 0.00", -0.2784518500661026], ["phish_hints <= 0.00", -0.1722234596174202], ["0.00 < nb_www <= 1.00", -0.15934918695806985], ["longest_words_raw > 0.71", 0.12835580839274371], ["nb_dots <= 0.00", -0.08175574416577341], ["ratio_digits_url > 1.00", 0.0672306975383935], ["ratio_digits_host <= 0.00", -0.06344583694287365], ["nb_qm <= 0.00", -0.0552480084955959], ["ratio_intHyperlinks > 0.28", -0.050333829945631355], ["avg_word_path > 0.28", 0.017502586715169726], ["shortest_word_host <= 0.00", 0.012651624659889112], ["0.00 < length_words_raw <= 0.50", 0.004272953896787517], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["page_rank <= -0.50", 0.5300497246550185], ["-1.00 < google_index <= 0.00", -0.26386762631705585], ["0.00 < nb_www <= 1.00", -0.16868147169975017], ["phish_hints <= 0.00", -0.1640539615108124], ["longest_words_raw > 0.71", 0.12179960270997739], ["nb_dots <= 0.00", -0.09162946336967114], ["ratio_digits_host <= 0.00", -0.05809494604073437], ["ratio_digits_url > 1.00", 0.051099868480775495], ["nb_qm <= 0.00", -0.041931152017520984], ["ratio_intHyperlinks > 0.28", -0.03931208802817631], ["shortest_word_host <= 0.00", 0.018693319145479365], ["0.00 < length_words_raw <= 0.50", 0.016822639855041142], ["avg_word_path > 0.28", 0.01049485845892477], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["page_rank", "-0.75", 0.518354529173941], ["google_index", "0.00", -0.2784518500661026], ["phish_hints", "0.00", -0.1722234596174202], ["nb_www", "1.00", -0.15934918695806985], ["longest_words_raw", "3.00", 0.12835580839274371], ["nb_dots", "0.00", -0.08175574416577341], ["ratio_digits_url", "2.49", 0.0672306975383935], ["ratio_digits_host", "0.00", -0.06344583694287365], ["nb_qm", "0.00", -0.0552480084955959], ["ratio_intHyperlinks", "0.36", -0.050333829945631355], ["avg_word_path", "1.28", 0.017502586715169726], ["shortest_word_host", "0.00", 0.012651624659889112], ["length_words_raw", "0.33", 0.004272953896787517], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "-0.75", 0.5300497246550185], ["google_index", "0.00", -0.26386762631705585], ["nb_www", "1.00", -0.16868147169975017], ["phish_hints", "0.00", -0.1640539615108124], ["longest_words_raw", "3.00", 0.12179960270997739], ["nb_dots", "0.00", -0.09162946336967114], ["ratio_digits_host", "0.00", -0.05809494604073437], ["ratio_digits_url", "2.49", 0.051099868480775495], ["nb_qm", "0.00", -0.041931152017520984], ["ratio_intHyperlinks", "0.36", -0.03931208802817631], ["shortest_word_host", "0.00", 0.018693319145479365], ["length_words_raw", "0.33", 0.016822639855041142], ["avg_word_path", "1.28", 0.01049485845892477], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>

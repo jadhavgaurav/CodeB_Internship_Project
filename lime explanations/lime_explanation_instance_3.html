@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divCWCI3QR6CW0N1MD"></div>
+        <div class="lime top_div" id="top_divEUFGP1ZGN9GKRO3"></div>
         
         <script>
-        var top_div = d3.select('#top_divCWCI3QR6CW0N1MD').classed('lime top_div', true);
+        var top_div = d3.select('#top_divEUFGP1ZGN9GKRO3').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.016505837440490723, 0.9834941625595093]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.03388535976409912, 0.9661146402359009]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["page_rank <= -0.50", 0.5156967125374811], ["-1.00 < google_index <= 0.00", -0.28400323636649827], ["phish_hints <= 0.00", -0.1628670297557138], ["nb_www <= 0.00", 0.15017715537354784], ["longest_words_raw > 0.71", 0.12321840605980254], ["ratio_intHyperlinks <= -0.72", 0.11703365737516097], ["nb_dots <= 0.00", -0.07932836574540802], ["ratio_digits_url <= 0.00", -0.07236142119996143], ["ratio_digits_host <= 0.00", -0.07127424795337299], ["nb_qm <= 0.00", -0.0481549987195054], ["length_words_raw <= -0.50", -0.045126634219888606], ["shortest_word_host > 1.00", -0.030966885494234923], ["avg_word_path > 0.28", 0.02159437847672415], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["page_rank <= -0.50", 0.5340256205503616], ["-1.00 < google_index <= 0.00", -0.2549848135669911], ["phish_hints <= 0.00", -0.18526618166829173], ["nb_www <= 0.00", 0.17165999658067857], ["longest_words_raw > 0.71", 0.1124609858500993], ["ratio_intHyperlinks <= -0.72", 0.11008064802078683], ["nb_dots <= 0.00", -0.06842444079119321], ["ratio_digits_url <= 0.00", -0.06305132614490223], ["length_words_raw <= -0.50", -0.05763762473341229], ["ratio_digits_host <= 0.00", -0.05679514865653324], ["nb_qm <= 0.00", -0.054552433202854335], ["shortest_word_host > 1.00", -0.025951653937839478], ["avg_word_path > 0.28", 0.016246089566414237], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["page_rank", "-0.75", 0.5156967125374811], ["google_index", "0.00", -0.28400323636649827], ["phish_hints", "0.00", -0.1628670297557138], ["nb_www", "0.00", 0.15017715537354784], ["longest_words_raw", "1.00", 0.12321840605980254], ["ratio_intHyperlinks", "-1.03", 0.11703365737516097], ["nb_dots", "-1.00", -0.07932836574540802], ["ratio_digits_url", "0.00", -0.07236142119996143], ["ratio_digits_host", "0.00", -0.07127424795337299], ["nb_qm", "0.00", -0.0481549987195054], ["length_words_raw", "-0.50", -0.045126634219888606], ["shortest_word_host", "5.00", -0.030966885494234923], ["avg_word_path", "0.33", 0.02159437847672415], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "-0.75", 0.5340256205503616], ["google_index", "0.00", -0.2549848135669911], ["phish_hints", "0.00", -0.18526618166829173], ["nb_www", "0.00", 0.17165999658067857], ["longest_words_raw", "1.00", 0.1124609858500993], ["ratio_intHyperlinks", "-1.03", 0.11008064802078683], ["nb_dots", "-1.00", -0.06842444079119321], ["ratio_digits_url", "0.00", -0.06305132614490223], ["length_words_raw", "-0.50", -0.05763762473341229], ["ratio_digits_host", "0.00", -0.05679514865653324], ["nb_qm", "0.00", -0.054552433202854335], ["shortest_word_host", "5.00", -0.025951653937839478], ["avg_word_path", "0.33", 0.016246089566414237], ["domain_in_title", "0.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>

@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_div0YHD7EAA75UTQQ3"></div>
+        <div class="lime top_div" id="top_div9SJIHF5T3KCD0M9"></div>
         
         <script>
-        var top_div = d3.select('#top_div0YHD7EAA75UTQQ3').classed('lime top_div', true);
+        var top_div = d3.select('#top_div9SJIHF5T3KCD0M9').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9968518018722534, 0.003148175310343504]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9974730610847473, 0.002526966156437993]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["-1.00 < google_index <= 0.00", -0.29126874823496884], ["0.00 < page_rank <= 0.50", -0.2816584380554495], ["phish_hints <= 0.00", -0.17206593148827742], ["0.00 < nb_www <= 1.00", -0.14385523201815203], ["ratio_digits_host <= 0.00", -0.06971239282682991], ["length_words_raw > 0.50", -0.06749631179865268], ["ratio_digits_url <= 0.00", -0.062009470866430036], ["nb_qm <= 0.00", -0.04486487295090711], ["-0.29 < longest_words_raw <= 0.00", -0.03614402055256698], ["-0.72 < ratio_intHyperlinks <= 0.00", -0.02036092345811037], ["shortest_word_host <= 0.00", 0.01937443205409481], ["0.00 < avg_word_path <= 0.28", -0.011459519694401238], ["0.00 < nb_dots <= 1.00", -0.003490055760210474], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["0.00 < page_rank <= 0.50", -0.30042583281417856], ["-1.00 < google_index <= 0.00", -0.26807571124243007], ["phish_hints <= 0.00", -0.18117966844616618], ["0.00 < nb_www <= 1.00", -0.17947415069027703], ["length_words_raw > 0.50", -0.07067262193742269], ["ratio_digits_host <= 0.00", -0.060421294970661475], ["-0.29 < longest_words_raw <= 0.00", -0.056995724348623725], ["nb_qm <= 0.00", -0.05032017294254954], ["ratio_digits_url <= 0.00", -0.04512762953485953], ["-0.72 < ratio_intHyperlinks <= 0.00", -0.03762005726052639], ["0.00 < avg_word_path <= 0.28", 0.006706087357028427], ["shortest_word_host <= 0.00", 0.0035679488728607655], ["0.00 < nb_dots <= 1.00", 0.001804856440943397], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["google_index", "0.00", -0.29126874823496884], ["page_rank", "0.50", -0.2816584380554495], ["phish_hints", "0.00", -0.17206593148827742], ["nb_www", "1.00", -0.14385523201815203], ["ratio_digits_host", "0.00", -0.06971239282682991], ["length_words_raw", "0.83", -0.06749631179865268], ["ratio_digits_url", "0.00", -0.062009470866430036], ["nb_qm", "0.00", -0.04486487295090711], ["longest_words_raw", "-0.14", -0.03614402055256698], ["ratio_intHyperlinks", "-0.61", -0.02036092345811037], ["shortest_word_host", "0.00", 0.01937443205409481], ["avg_word_path", "0.25", -0.011459519694401238], ["nb_dots", "1.00", -0.003490055760210474], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["page_rank", "0.50", -0.30042583281417856], ["google_index", "0.00", -0.26807571124243007], ["phish_hints", "0.00", -0.18117966844616618], ["nb_www", "1.00", -0.17947415069027703], ["length_words_raw", "0.83", -0.07067262193742269], ["ratio_digits_host", "0.00", -0.060421294970661475], ["longest_words_raw", "-0.14", -0.056995724348623725], ["nb_qm", "0.00", -0.05032017294254954], ["ratio_digits_url", "0.00", -0.04512762953485953], ["ratio_intHyperlinks", "-0.61", -0.03762005726052639], ["avg_word_path", "0.25", 0.006706087357028427], ["shortest_word_host", "0.00", 0.0035679488728607655], ["nb_dots", "1.00", 0.001804856440943397], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>

@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divVYV5YNE5XNSKPGU"></div>
+        <div class="lime top_div" id="top_div8B6DPMBE32ASG6P"></div>
         
         <script>
-        var top_div = d3.select('#top_divVYV5YNE5XNSKPGU').classed('lime top_div', true);
+        var top_div = d3.select('#top_div8B6DPMBE32ASG6P').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9990630149841309, 0.000937009637709707]);
+            var pp = new lime.PredictProba(pp_svg, ["Legitimate", "Phishing"], [0.9993187785148621, 0.0006812243373133242]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Legitimate", "Phishing"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["google_index <= -1.00", 0.2875558497915771], ["phish_hints <= 0.00", -0.18402437570481486], ["0.00 < nb_www <= 1.00", -0.1557886076083565], ["nb_dots <= 0.00", -0.0747802291487269], ["length_words_raw <= -0.50", -0.05448325895256689], ["ratio_digits_host <= 0.00", -0.054258869990364], ["ratio_digits_url <= 0.00", -0.05407375246088717], ["shortest_word_host <= 0.00", 0.042208425957719065], ["nb_qm <= 0.00", -0.035620645640333744], ["ratio_intHyperlinks > 0.28", -0.035246553536320356], ["longest_words_raw <= -0.29", -0.0315942798874965], ["avg_word_path <= -0.72", -0.007501377750189802], ["-0.50 < page_rank <= 0.00", 0.00041714470182719704], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
+                exp.show([["google_index <= -1.00", 0.24563154446947452], ["0.00 < nb_www <= 1.00", -0.18075943966839061], ["phish_hints <= 0.00", -0.16566291656029275], ["nb_dots <= 0.00", -0.08066827817970214], ["ratio_digits_host <= 0.00", -0.06427755135890938], ["ratio_digits_url <= 0.00", -0.059617557631971504], ["nb_qm <= 0.00", -0.05404473844322901], ["length_words_raw <= -0.50", -0.051341569825902364], ["ratio_intHyperlinks > 0.28", -0.03434321379856315], ["longest_words_raw <= -0.29", -0.02067233909113533], ["shortest_word_host <= 0.00", 0.014132372908256538], ["-0.50 < page_rank <= 0.00", -0.0021585503940942065], ["avg_word_path <= -0.72", 0.0002174877568991478], ["domain_in_title <= 0.00", 0.0]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["google_index", "-1.00", 0.2875558497915771], ["phish_hints", "0.00", -0.18402437570481486], ["nb_www", "1.00", -0.1557886076083565], ["nb_dots", "0.00", -0.0747802291487269], ["length_words_raw", "-0.50", -0.05448325895256689], ["ratio_digits_host", "0.00", -0.054258869990364], ["ratio_digits_url", "0.00", -0.05407375246088717], ["shortest_word_host", "0.00", 0.042208425957719065], ["nb_qm", "0.00", -0.035620645640333744], ["ratio_intHyperlinks", "0.33", -0.035246553536320356], ["longest_words_raw", "-0.29", -0.0315942798874965], ["avg_word_path", "-0.72", -0.007501377750189802], ["page_rank", "0.00", 0.00041714470182719704], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
+            exp.show_raw_tabular([["google_index", "-1.00", 0.24563154446947452], ["nb_www", "1.00", -0.18075943966839061], ["phish_hints", "0.00", -0.16566291656029275], ["nb_dots", "0.00", -0.08066827817970214], ["ratio_digits_host", "0.00", -0.06427755135890938], ["ratio_digits_url", "0.00", -0.059617557631971504], ["nb_qm", "0.00", -0.05404473844322901], ["length_words_raw", "-0.50", -0.051341569825902364], ["ratio_intHyperlinks", "0.33", -0.03434321379856315], ["longest_words_raw", "-0.29", -0.02067233909113533], ["shortest_word_host", "0.00", 0.014132372908256538], ["page_rank", "0.00", -0.0021585503940942065], ["avg_word_path", "-0.72", 0.0002174877568991478], ["domain_in_title", "-1.00", 0.0]], 1, raw_div);
         
         </script>
         </body></html>
