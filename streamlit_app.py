@@ -15,7 +15,7 @@ st.set_page_config(
 MODEL_PATH = "models/xgb_pipeline.pkl"
 if not os.path.exists(MODEL_PATH):
     with st.spinner("🔁 Downloading model from DVC..."):
-        os.system(f"dvc pull {MODEL_PATH}.dvc")
+        os.system(f"dvc pull xgb_pipeline.pkl.dvc")
 pipeline = joblib.load(MODEL_PATH)
 
 # ========== Custom CSS Styling ==========
