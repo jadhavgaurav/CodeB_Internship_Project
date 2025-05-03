@@ -45,6 +45,11 @@ jobs:
     - name: Train Model
       run: python train.py
 
+    - name: Configure Git identity
+      run: |
+        git config --global user.email "gaurav.vjadhav01@gmail.com"
+        git config --global user.name "Gaurav Jadhav"
+
     - name: Track Final Model with DVC
       run: |
         dvc add models/xgb_pipeline.pkl
