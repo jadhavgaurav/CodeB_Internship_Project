@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DVC_GS_CREDS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}  # GCS service account JSON string
+      GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}  # GCS service account JSON string
       STREAMLIT_APP_NAME: ${{ secrets.STREAMLIT_APP_NAME }} 
       OPENPAGERANK_API_KEY: ${{ secrets.OPENPAGERANK_API_KEY }}
       GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}

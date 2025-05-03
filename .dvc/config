@@ -2,4 +2,4 @@
     remote = gcsremote
 ['remote "gcsremote"']
     url = gs://phish-storage/models
-    credentialpath = ../secrets/phishing-detecti-1746087788677-163687a26bdc.json
+    credentialpath = ../secrets/phishing-detecti-1746087788677-2f68c11f6bd6.json
