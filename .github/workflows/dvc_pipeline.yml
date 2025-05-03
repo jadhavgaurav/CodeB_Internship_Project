@@ -39,7 +39,7 @@ jobs:
         dvc remote modify gcsremote credentialpath gcloud-key.json
         dvc remote default gcsremote
 
-    - name: Pull Dataset (if not present)
+    - name: Pull Dataset and models
       run: dvc pull -r gcsremote
 
     - name: Train Model
