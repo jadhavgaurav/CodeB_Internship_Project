@@ -4,12 +4,6 @@ import os
 import joblib
 from feature_scraper import extract_features_from_url
 import json
-# ========== Page Config ==========
-st.set_page_config(
-    page_title="Phishing Website Detector",
-    page_icon="🔐",
-    layout="centered"
-)
 
 # ========== Authenticate with GCP ==========
 # Save GCP credentials from Streamlit secrets to a temp file
@@ -35,6 +29,7 @@ try:
 except Exception as e:
     st.error(f"🚨 Model loading failed: {e}")
     st.stop()
+
 # ========== Custom CSS Styling ==========
 st.markdown("""
 <style>
