@@ -12,25 +12,11 @@ st.set_page_config(
 )
 
 # ========== Load Pipeline from DVC (if not found) ==========
-
 MODEL_PATH = "models/xgb_pipeline.pkl"
-
-try:
-    if not os.path.exists(MODEL_PATH):
-        st.warning("🚨 Model file not found locally. Trying to pull from DVC...")
-        result = os.system(f"dvc pull {MODEL_PATH}.dvc")
-        if result != 0:
-            raise RuntimeError("DVC pull failed. Check remote configuration and credentials.")
-
-    pipeline = joblib.load(MODEL_PATH)
-
-except FileNotFoundError:
-    st.error("❌ Model file not found. Make sure it's pulled locally before deploying.")
-    st.stop()
-
-except Exception as e:
-    st.error(f"⚠️ Error loading model: {e}")
-    st.stop()
+if not os.path.exists(MODEL_PATH):
+    with st.spinner("🔁 Downloading model from DVC..."):
+        os.system(f"dvc pull {MODEL_PATH}.dvc")
+pipeline = joblib.load(MODEL_PATH)
 
 # ========== Custom CSS Styling ==========
 st.markdown("""
