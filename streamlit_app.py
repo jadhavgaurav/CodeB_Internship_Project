@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import joblib
 from feature_scraper import extract_features_from_url
-
+import json
 # ========== Page Config ==========
 st.set_page_config(
     page_title="Phishing Website Detector",
@@ -11,13 +11,30 @@ st.set_page_config(
     layout="centered"
 )
 
+# ========== Authenticate with GCP ==========
+# Save GCP credentials from Streamlit secrets to a temp file
+gcp_credentials = st.secrets["gcp"]
+gcp_key_path = "/tmp/gcp-key.json"
+with open(gcp_key_path, "w") as f:
+    json.dump(gcp_credentials, f)
+
+# Set environment variable so GCS/DVC uses it
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = gcp_key_path
+
 # ========== Load Pipeline from DVC (if not found) ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
-if not os.path.exists(MODEL_PATH):
-    with st.spinner("🔁 Downloading model from DVC..."):
-        os.system(f"dvc pull {MODEL_PATH}.dvc")
-pipeline = joblib.load(MODEL_PATH)
 
+try:
+    if not os.path.exists(MODEL_PATH):
+        with st.spinner("🔁 Downloading model from DVC..."):
+            result = os.system(f"dvc pull {MODEL_PATH}.dvc")
+            if result != 0:
+                raise FileNotFoundError("❌ DVC pull failed. Could not download model.")
+
+    pipeline = joblib.load(MODEL_PATH)
+except Exception as e:
+    st.error(f"🚨 Model loading failed: {e}")
+    st.stop()
 # ========== Custom CSS Styling ==========
 st.markdown("""
 <style>
