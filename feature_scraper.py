@@ -15,7 +15,6 @@ OPENPAGERANK_API_KEY = os.getenv("OPEN_PAGERANK_API_KEY")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GOOGLE_CSE_ID = os.getenv("GOOGLE_CSE_ID")
 
-
 def extract_features_from_url(url):
     parsed = urlparse(url)
     hostname = parsed.hostname or ''
