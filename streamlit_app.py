@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import joblib
 from feature_scraper import extract_features_from_url
-
+import json
 # ========== Page Config ==========
 st.set_page_config(
     page_title="Phishing Website Detector",
@@ -11,11 +11,22 @@ st.set_page_config(
     layout="centered"
 )
 
-# ========== Load Pipeline from DVC (if not found) ==========
+
+# ========== Create Service Account File from Secrets ==========
+GCP_KEY_PATH = "/tmp/gcp_key.json"
+
+with open(GCP_KEY_PATH, "w") as f:
+    json.dump(st.secrets["gcp_service_account"], f)
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GCP_KEY_PATH
+
+# ========== Pull Model from DVC if Not Present ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
 if not os.path.exists(MODEL_PATH):
     with st.spinner("🔁 Downloading model from DVC..."):
-        os.system(f"dvc pull {MODEL_PATH}.dvc")
+        os.system("dvc pull models/xgb_pipeline.pkl.dvc")
+
+# ========== Load Model ==========
 pipeline = joblib.load(MODEL_PATH)
 
 # ========== Custom CSS Styling ==========
