@@ -36,7 +36,7 @@ jobs:
       run: |
         mkdir -p ~/.config/gcloud
         echo "${GCP_SERVICE_ACCOUNT_KEY}" > gcloud-key.json
-        dvc remote modify gcsremote gdrive_service_account_json_file_path gcloud-key.json
+        dvc remote modify gcsremote credentialpath gcloud-key.json
         dvc remote default gcsremote
 
     - name: Pull Dataset (if not present)
