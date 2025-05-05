@@ -4,6 +4,8 @@ import os
 import joblib
 from feature_scraper import extract_features_from_url
 import subprocess
+import json
+import tempfile
 
 # ========== Constants ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
