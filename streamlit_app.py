@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import joblib
 from feature_scraper import extract_features_from_url
+import subprocess
 
 # ========== Page Config ==========
 st.set_page_config(
@@ -11,11 +12,27 @@ st.set_page_config(
     layout="centered"
 )
 
-# ========== Load Pipeline from DVC (if not found) ==========
+# ========== Constants ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
+GCP_KEY_PATH = "secrt/gcpp.json" # Path to your GCP credentials file
+
+# ========== Set GCP Credentials ==========
+if os.path.exists(GCP_KEY_PATH):
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.abspath(GCP_KEY_PATH)
+else:
+    st.error("🚨 GCP credentials file not found. Upload 'gcp-key.json' to your project root.")
+    st.stop()
+
+# ========== Load Model ==========
 if not os.path.exists(MODEL_PATH):
-    with st.spinner("🔁 Downloading model from DVC..."):
-        os.system(f"dvc pull {MODEL_PATH}.dvc")
+    with st.spinner("🔁 Downloading model from DVC remote (Google Cloud Storage)..."):
+        try:
+            subprocess.run(["dvc", "pull", f"{MODEL_PATH}.dvc"], check=True)
+        except subprocess.CalledProcessError as e:
+            st.error("❌ Failed to pull model from DVC. Check credentials and DVC setup.")
+            st.stop()
+
+# Load the model
 pipeline = joblib.load(MODEL_PATH)
 
 # ========== Custom CSS Styling ==========
