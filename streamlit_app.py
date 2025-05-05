@@ -5,34 +5,30 @@ import joblib
 from feature_scraper import extract_features_from_url
 import subprocess
 
-# ========== Page Config ==========
-st.set_page_config(
-    page_title="Phishing Website Detector",
-    page_icon="🔐",
-    layout="centered"
-)
-
 # ========== Constants ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
-GCP_KEY_PATH = "secrt/gcp_key.json" # Path to your GCP credentials file
 
-# ========== Set GCP Credentials ==========
-if os.path.exists(GCP_KEY_PATH):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.abspath(GCP_KEY_PATH)
-else:
-    st.error("🚨 GCP credentials file not found. Upload 'gcp-key.json' to your project root.")
+# ========== Set GCP Credentials from Streamlit Secrets ==========
+if "gcp" not in st.secrets or "gcp_key" not in st.secrets["gcp"]:
+    st.error("🚨 GCP credentials not found in Streamlit secrets.")
     st.stop()
 
-# ========== Load Model ==========
+# Create a temporary file for the GCP key
+with tempfile.NamedTemporaryFile(delete=False, suffix=".json", mode="w") as f:
+    json.dump(st.secrets["gcp"]["gcp_key"], f)
+    temp_gcp_key_path = f.name
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = temp_gcp_key_path
+
+# ========== Download Model with DVC ==========
 if not os.path.exists(MODEL_PATH):
     with st.spinner("🔁 Downloading model from DVC remote (Google Cloud Storage)..."):
         try:
             subprocess.run(["dvc", "pull", f"{MODEL_PATH}.dvc"], check=True)
-        except subprocess.CalledProcessError as e:
+        except subprocess.CalledProcessError:
             st.error("❌ Failed to pull model from DVC. Check credentials and DVC setup.")
             st.stop()
 
-# Load the model
+# ========== Load Model ==========
 pipeline = joblib.load(MODEL_PATH)
 
 # ========== Custom CSS Styling ==========
