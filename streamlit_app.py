@@ -14,7 +14,7 @@ st.set_page_config(
 
 # ========== Constants ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
-GCP_KEY_PATH = "secrt/gcpp.json" # Path to your GCP credentials file
+GCP_KEY_PATH = "secrt/gcp_key.json" # Path to your GCP credentials file
 
 # ========== Set GCP Credentials ==========
 if os.path.exists(GCP_KEY_PATH):
