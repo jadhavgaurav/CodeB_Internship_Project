@@ -12,25 +12,36 @@ from google.oauth2 import service_account
 # Config
 st.set_page_config(page_title="Phishing Website Detector", page_icon="🔐", layout="centered")
 
-# ========== Constants ==========
-MODEL_PATH = "models/xgb_pipeline.pkl"
-GCP_KEY_PATH = "secrt/gcp_key.json"
+# # ========== Constants ==========
+# MODEL_PATH = "models/xgb_pipeline.pkl"
+# GCP_KEY_PATH = "secrt/gcp_key.json"
 
-# Authenticate GCP
-if os.path.exists(GCP_KEY_PATH):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.abspath(GCP_KEY_PATH)
+# # Authenticate GCP
+# if os.path.exists(GCP_KEY_PATH):
+#     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.abspath(GCP_KEY_PATH)
+# else:
+#     st.error("🚨 GCP credentials file not found.")
+#     st.stop()
+
+# # Pull model using DVC
+# if not os.path.exists(MODEL_PATH):
+#     with st.spinner("🔁 Downloading model from GCS using DVC..."):
+#         try:
+#             subprocess.run(["dvc", "pull", f"{MODEL_PATH}.dvc"], check=True)
+#         except subprocess.CalledProcessError:
+#             st.error("❌ Failed to pull model from DVC. Check credentials or DVC setup.")
+#             st.stop()
+
+
+MODEL_PATH = "md/xgb_pipeline.pkl"
+
+# Load model directly
+if os.path.exists(MODEL_PATH):
+    pipeline = joblib.load(MODEL_PATH)
+    st.success("✅ Model loaded successfully and ready for prediction.")
 else:
-    st.error("🚨 GCP credentials file not found.")
+    st.error(f"❌ Model file not found at: {MODEL_PATH}")
     st.stop()
-
-# Pull model using DVC
-if not os.path.exists(MODEL_PATH):
-    with st.spinner("🔁 Downloading model from GCS using DVC..."):
-        try:
-            subprocess.run(["dvc", "pull", f"{MODEL_PATH}.dvc"], check=True)
-        except subprocess.CalledProcessError:
-            st.error("❌ Failed to pull model from DVC. Check credentials or DVC setup.")
-            st.stop()
 
 # Load model
 pipeline = joblib.load(MODEL_PATH)
