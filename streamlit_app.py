@@ -3,11 +3,6 @@ import pandas as pd
 import os
 import joblib
 from feature_scraper import extract_features_from_url
-import subprocess
-import json
-import tempfile
-import streamlit as st
-from google.oauth2 import service_account
 
 # Config
 st.set_page_config(page_title="Phishing Website Detector", page_icon="🔐", layout="centered")
@@ -43,10 +38,6 @@ else:
     st.error(f"❌ Model file not found at: {MODEL_PATH}")
     st.stop()
 
-# Load model
-pipeline = joblib.load(MODEL_PATH)
-st.success("✅ Model loaded and ready.")
-
 # ========== Custom CSS Styling ==========
 st.markdown("""
 <style>
@@ -70,7 +61,7 @@ st.markdown("""
         max-width: 700px;
         margin: auto;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        background-color: rgba(255, 255, 255, 0.9);
+        # background-color: rgba(255, 255, 255, 0.9);
     }
     .predict-btn > button {
         background-color: #dc3545 !important;
