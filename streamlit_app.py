@@ -14,7 +14,7 @@ st.set_page_config(page_title="Phishing Website Detector", page_icon="🔐", lay
 
 # ========== Constants ==========
 MODEL_PATH = "models/xgb_pipeline.pkl"
-GCP_KEY_PATH = "secret/gcp_key.json"
+GCP_KEY_PATH = "secrt/gcp_key.json"
 
 # Authenticate GCP
 if os.path.exists(GCP_KEY_PATH):
