@@ -54,14 +54,14 @@ st.markdown("""
         color: #23a9f2;
         margin: 2rem 0 1.5rem 0;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
     }
     .main-box {
         padding: 2rem;
-        border-radius: 15px;
         max-width: 700px;
         margin: auto;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        # background-color: rgba(255, 255, 255, 0.9);
     }
     .predict-btn > button {
         background-color: #dc3545 !important;
@@ -76,8 +76,6 @@ st.markdown("""
 # ========== Title ==========
 st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
-# ========== Main UI ==========
-st.markdown('<div class="main-box">', unsafe_allow_html=True)
 
 url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
