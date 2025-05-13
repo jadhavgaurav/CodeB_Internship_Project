@@ -4,7 +4,6 @@ import os
 import joblib
 import shap
 import matplotlib.pyplot as plt
-import streamlit.components.v1 as components
 from feature_scraper import extract_features_from_url
 
 # Config
@@ -12,7 +11,7 @@ st.set_page_config(page_title="Phishing Website Detector", page_icon="🔐", lay
 
 MODEL_PATH = "md/xgb_pipeline.pkl"
 
-# Load model directly
+# Load model
 if os.path.exists(MODEL_PATH):
     pipeline = joblib.load(MODEL_PATH)
     st.success("✅ Model loaded successfully and ready for prediction.")
@@ -20,7 +19,7 @@ else:
     st.error(f"❌ Model file not found at: {MODEL_PATH}")
     st.stop()
 
-# Initialize SHAP TreeExplainer
+# Initialize SHAP Explainer
 try:
     explainer = shap.TreeExplainer(pipeline.named_steps["classifier"])
 except Exception as e:
@@ -65,16 +64,14 @@ st.markdown("""
 # ========== Title ==========
 st.markdown('<div class="title-style">🔍 Phishing URL Detector</div>', unsafe_allow_html=True)
 
+# Input URL
 url_input = st.text_input("Enter Website URL:", placeholder="https://example.com")
 
 col = st.columns([1, 1, 1])
 with col[1]:
     predict_btn = st.button("🚀 Predict")
 
-# Store features for explanation if needed
-features_df = None
-phishing_prob = None
-
+# Prediction logic
 if predict_btn:
     if not url_input:
         st.warning("⚠️ Please enter a URL.")
@@ -83,6 +80,10 @@ if predict_btn:
             with st.spinner("🔄 Extracting features & predicting..."):
                 features_df = extract_features_from_url(url_input)
                 phishing_prob = pipeline.predict_proba(features_df)[0][1]
+
+                # Store in session state for explanation
+                st.session_state.features_df = features_df
+                st.session_state.predicted = True
 
                 st.info(f"📊 Model Confidence (Phishing): **{phishing_prob:.2%}**")
 
@@ -93,11 +94,13 @@ if predict_btn:
         except Exception as e:
             st.error(f"❌ Error: {str(e)}")
 
-# Explain Button
-if features_df is not None and st.button("🔎 Explain"):
-    if explainer:
+# Show explain button if prediction occurred
+if st.session_state.get("predicted") and st.button("🔎 Explain"):
+    features_df = st.session_state.get("features_df")
+
+    if explainer and features_df is not None:
         try:
-            # Preprocess the features manually using pipeline steps
+            # Apply preprocessing pipeline steps manually
             transformed = pipeline.named_steps["power_transformer"].transform(features_df)
             scaled = pipeline.named_steps["scaler"].transform(transformed)
 
@@ -106,12 +109,14 @@ if features_df is not None and st.button("🔎 Explain"):
             st.subheader("🔍 SHAP Explanation (Local Prediction)")
 
             fig = plt.figure()
-            shap.plots._waterfall.waterfall_legacy(explainer.expected_value, shap_values[0], features_df.columns, show=False)
+            shap.plots._waterfall.waterfall_legacy(
+                explainer.expected_value, shap_values[0], features_df.columns, show=False
+            )
             st.pyplot(fig)
 
         except Exception as e:
             st.error(f"❌ SHAP explanation failed: {str(e)}")
     else:
-        st.warning("⚠️ SHAP explainer is not initialized.")
+        st.warning("⚠️ SHAP explainer not available or feature data missing.")
 
 st.markdown('</div>', unsafe_allow_html=True)
