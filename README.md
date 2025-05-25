@@ -2,11 +2,13 @@
 
 This repository contains the end-to-end solution for detecting phishing websites using advanced machine learning techniques. The project was developed as part of the **CodeB Data Science Integrated Internship** at IT Vedant.
 
+🚀 **Live App**: [website-phishing-detection.streamlit.app](https://website-phishing-detection.streamlit.app)
+
 ---
 
 ## 📌 Problem Statement
 
-Phishing websites trick users into revealing sensitive information by mimicking legitimate domains. This project aims to build a **machine learning classification model** that can detect whether a website is **phishing** or **legitimate**, based on URL features and HTML/JS behavior.
+Phishing websites trick users into revealing sensitive information by mimicking legitimate domains. This project builds a **machine learning classification model** to detect whether a website is **phishing** or **legitimate**, based on URL and HTML/JS behavior features. It also explains predictions using **LIME** and **SHAP**.
 
 ---
 
@@ -18,112 +20,166 @@ Phishing websites trick users into revealing sensitive information by mimicking 
 
 ---
 
-## ✅ Project Timeline (Week-wise Summary)
+## ✅ Project Timeline Summary
 
-### 📅 Week 1 – Problem Understanding & Dataset Exploration
-- Understood phishing behaviors and detection strategies
-- Dropped the `url` column (non-informative)
-- Target analysis: `status` distribution is balanced (no resampling needed)
-- Performed EDA:
-  - Histograms, KDE plots, correlation heatmaps
-  - Identified skewed and highly variable features
-- Insights:
-  - Phishing URLs often have higher `nb_qm`, `nb_www`, `ratio_digits_url`
-  - Legitimate sites have more stable HTML tag distributions
+### 📅 Week 1–4 – Data Exploration & Preprocessing
+- Dropped irrelevant columns (`url`)
+- Balanced classes → no oversampling needed
+- Performed correlation filtering and skewness handling
+- Applied robust scaling and Yeo-Johnson transformation
+- Feature Engineering:
+  - `url_complexity`, `tag_to_link_ratio`, `domain_numeric_intensity`, `path_word_complexity`
+- Final Features Selected: ✅ 28 (via Correlation, ANOVA, RFE, Random Forest Importance, VIF)
 
-### 📅 Week 2 – Feature Understanding & Selection
-- Feature description created for all 88 usable features
-- Target label encoded (`legitimate` → 0, `phishing` → 1)
-- Feature Selection Pipeline:
-  1. 🔁 **Correlation Check** (dropped features with `corr > 0.9`)
-  2. 📊 **Univariate ANOVA (f_classif)** – top 30 features
-  3. 🌲 **Random Forest Feature Importance** – top 30 features
-  4. 🔍 **RFE (Recursive Feature Elimination)** – top 30 features
-  5. 🔗 Final features = Intersection of ANOVA & RFE results
-  6. 🚫 **VIF Analysis** – removed multicollinear features (`VIF > 10`)
+### 📅 Week 5–6 – Model Building, Evaluation & Explanation
+- Trained multiple models: Logistic Regression, KNN, SVM, Decision Tree, Random Forest, XGBoost, ANN
+- ✅ Best Model: **XGBoostClassifier**
+- Hyperparameter tuning via `GridSearchCV`
+- ROC-AUC: **0.990**, F1 Score: **95.86%**
 
-### 📅 Week 3 – Data Cleaning & Preprocessing
-- Checked for null values (none found)
-- No duplicates present
-- Feature scaling: ✔️ **RobustScaler**
-- Target-preserving split: 80% train / 20% test
-- Skewness handled using: ✔️ **PowerTransformer (Yeo-Johnson)**
-- Applied final outlier-safe transformations
-- Total final features used: ✅ 28
+---
 
-### 📅 Week 4 – Feature Engineering
-Created 4 high-impact custom features:
-1. `url_complexity` – sum of suspicious symbols
-2. `tag_to_link_ratio` – ratio of tags vs hyperlinks
-3. `domain_numeric_intensity` – digit density × domain age
-4. `path_word_complexity` – avg path word length × longest word
+## ⚙️ Tech Stack
 
-Dropped 5 redundant features based on correlation & low importance.
+| Component        | Tool/Library         |
+|------------------|----------------------|
+| Data Processing  | Pandas, NumPy        |
+| Visualization    | Matplotlib, Seaborn  |
+| ML Models        | Scikit-learn, XGBoost|
+| Explainability   | SHAP, LIME           |
+| Frontend         | Streamlit            |
+| Deployment       | Streamlit Cloud      |
+| Version Control  | Git, DVC             |
+| Containerization | Docker               |
+| CI/CD            | GitHub Actions       |
 
-### 📅 Week 5–6 – Model Building, Evaluation & Interpretation
+---
 
-🔍 **Models Trained**:
-- Logistic Regression
-- KNN
-- SVM
-- Decision Tree
-- Random Forest ✅
-- XGBoost
-- ANN
+## 📁 Project Structure
 
-🎯 **Best Model**: `XGBoostClassifier`
-- **Hyperparameter tuning**: `GridSearchCV` with `roc_auc` scoring
-- **Best params**:
-```python
-RandomForestClassifier(
-    'colsample_bytree': 0.8, 
-    'gamma': 0.1, 
-    'learning_rate': 0.1, 
-    'max_depth': 10, 
-    'n_estimators': 100, 
-    'subsample': 0.8
-)
+```
+phishing-detector/
+├── app.py                  # Streamlit frontend
+├── feature_scrapper.py     # URL feature extraction
+├── model.pkl               # Trained model
+├── explainer.pkl           # Optional LIME/SHAP objects
+├── .env                    # API keys
+├── Dockerfile              # Docker container setup
+├── requirements.txt        # Python dependencies
+├── dvc.yaml                # DVC pipeline
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # GitHub Actions workflow
+├── data/
+│   └── dataset_phishing.csv
+└── model/
+    └── xgb_pipeline.pkl
 ```
 
-## ✅ Model Evaluation & Performance
+---
 
-### 📊 Evaluation Metrics
+## 🔍 Explainable AI – LIME & SHAP
+
+### LIME Highlights
+- Local explanation for individual predictions
+- Interactive `.html` visualizations
+- Top influential features:
+  - `google_index`, `page_rank`, `phish_hints`, `ratio_intHyperlinks`
+
+### SHAP Highlights
+- Global feature importance and summary plots
+- SHAP bar plot aligns with domain intuition:
+  - Low trust scores → phishing
+  - Legitimate indicators (title-domain match, indexing) → non-phishing
+
+---
+
+## 🎯 Evaluation Metrics
 
 | Metric       | Value   |
 |--------------|---------|
-| Accuracy     | 95.83%   |
-| Precision    | 95.46%   |
-| Recall       | 96.23%   |
-| F-1 Score    | 95.86    |
+| Accuracy     | 95.83%  |
+| Precision    | 95.46%  |
+| Recall       | 96.23%  |
+| F1 Score     | 95.86%  |
 | ROC-AUC      | 0.990   |
 
-These metrics indicate that the model is highly effective in distinguishing between **phishing** and **legitimate** websites.
+### Visual Tools
+- Confusion Matrix Heatmap
+- ROC Curve
+- Precision-Recall Curve
 
 ---
 
-### 📈 Visualizations
+## 🧪 Sample Use Case (LIME)
 
-- ✅ **Confusion Matrix Heatmap**
-- ✅ **ROC Curve**
-- ✅ **Precision-Recall Curve** *(with threshold annotations)*
-
-All plots were generated to visually assess the model's classification confidence and performance balance.
+**URL:** `http://secure-login-info.confirmupdate.biz`  
+**Prediction:** Phishing  
+**Top Contributors:**  
+- `google_index = 0` → +0.31  
+- `phish_hints = 1` → +0.22  
+- `page_rank = 1` → +0.18
 
 ---
 
-## 🔍 Model Explainability (LIME)
+## 🧠 Run the App Locally
 
-LIME was used to explain the **top 5 individual predictions** made by the final Random Forest model.
+```bash
+git clone https://github.com/<your-username>/phishing-detector.git
+cd phishing-detector
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
-### 🔑 Key Contributing Features:
-- `google_index`
-- `page_rank`
-- `nb_www`
-- `ratio_intHyperlinks`
+# Add .env file
+echo "GOOGLE_API_KEY=your_key
+PAGERANK_API_KEY=your_key" > .env
 
-### 📂 Output Format:
-- Interactive LIME explanations saved as `.html` files (`lime_explanation_instance_*.html`)
-- Feature contribution bar plots highlight which features pushed predictions toward phishing or legitimate.
+# Launch app
+streamlit run app.py
+```
 
-These interpretations help build **trust** and **transparency** in the model by showing how it makes decisions for specific URLs.
+---
 
+## 🐳 Docker Deployment
+
+```bash
+docker build -t phishing-detector .
+docker run -p 8501:8501 phishing-detector
+```
+
+---
+
+## ☁️ Streamlit Cloud Deployment
+
+1. Push code to GitHub
+2. Connect repo to [streamlit.io](https://streamlit.io)
+3. Add secrets for `GOOGLE_API_KEY` and `PAGERANK_API_KEY`
+4. Click **Deploy**
+
+---
+
+## 📦 DVC Usage
+
+```bash
+dvc pull         # Downloads model and dataset files
+```
+
+Tracked:
+- `data/dataset_phishing.csv`
+- `model/model.pkl`
+
+---
+
+## 📜 License
+
+MIT License © 2025 Gaurav Jadhav  
+[GitHub](https://github.com/jadhavgaurav) | [Portfolio](https://jadhavgaurav.github.io/portfolio) | [LinkedIn](https://linkedin.com/in/gaurav-jadhav-617740213)
+
+---
+
+## 🙏 Credits
+
+- SHAP, LIME, OpenPageRank API, Google CSE API
+- IT Vedant – CodeB Data Science Internship
+- Streamlit & GitHub Actions team
